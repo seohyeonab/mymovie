@@ -310,36 +310,22 @@ df["영화명표시"] = df.apply(
 )
 
 
-# ----------------------------------------
-# 17. 순위 증감 화살표 만들기
-# ----------------------------------------
-# rankInten이 양수 → 빨간 위 화살표
-# rankInten이 음수 → 파란 아래 화살표
-# 0 → 변화 없음
-#
-# HTML을 사용해 색상을 지정한다.
-
+# 순위 변동 표시
 def make_rank_change(value):
-
     if pd.isna(value):
         return "-"
-
+    
     value = int(value)
 
     if value > 0:
-        return f":red[⬆ {value}]"
-
+        return f"⬆ {value}"
     elif value < 0:
-        return f":blue[⬇ {abs(value)}]"
-
+        return f"⬇ {abs(value)}"
     else:
         return "—"
 
 
-df["순위변동"] = df["rankInten"].apply(
-    make_rank_change
-)
-
+df["순위변동"] = df["rankInten"].apply(make_rank_change)
 
 # ----------------------------------------
 # 18. 선택한 날짜 표시
